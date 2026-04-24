@@ -12,7 +12,7 @@
 		"sources": "https://github.com/pohci/classicvillagers",
 		"issues": "https://github.com/pohci/classicvillagers/issues"
 	},
-	"license": "Unlicense",
+	"license": "MIT",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
