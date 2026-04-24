@@ -12,3 +12,9 @@ You can configure Classic Villagers using a couple of methods:
 
 ### Source & Bug Reports:
 [Github: pohci](https://github.com/pohci/classicvillagers)
+
+## Gallery
+
+![ClassicVillagers image 1](src/main/resources/assets/classicvillagers/gallery1.png)
+![ClassicVillagers image 2](src/main/resources/assets/classicvillagers/gallery2.png)
+![ClassicVillagers image 3](src/main/resources/assets/classicvillagers/gallery3.png)
