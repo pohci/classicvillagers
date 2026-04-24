@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "classicvillagers",
+	"version": "${version}",
+	"name": "ClassicVillagers",
+	"description": "Restores the classic baby villager hitbox dimensions, allowing a multitude of Minecraft farms to work again.",
+	"authors": [
+		"pohci."
+	],
+	"contact": {
+		"homepage": "https://github.com/pohci/classicvillagers",
+		"sources": "https://github.com/pohci/classicvillagers",
+		"issues": "https://github.com/pohci/classicvillagers/issues"
+	},
+	"license": "Unlicense",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"pohci.classicvillagers.ClassicVillagers"
+		],
+		"client": [
+			"pohci.classicvillagers.client.ClassicVillagersClient"
+		],
+		"modmenu": [
+			"pohci.classicvillagers.client.menu.ModMenuCompat"
+		]
+	},
+	"mixins": [
+		"classicvillagers.mixins.json"
+	],
+	"custom": {
+		"modmenu": {
+			"update_checker": true
+		}
+	},
+	"depends": {
+		"fabricloader": "${fabricloader_dependency_range}",
+		"minecraft": "${minecraft_dependency_range}",
+		"java": "${java_dependency_range}",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

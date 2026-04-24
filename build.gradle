@@ -1,0 +1,72 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+base {
+	archivesName = "classicvillagers-v${project.mod_version}-${project.minecraft_version_label}"
+}
+
+repositories {
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"classicvillagers" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+	inputs.property "minecraft_dependency_range", project.minecraft_dependency_range
+	inputs.property("fabricloader_dependency_range", project.fabricloader_dependency_range)
+	inputs.property("java_dependency_range", project.java_dependency_range)
+
+	filesMatching("fabric.mod.json") {
+		expand(
+			"version": inputs.properties.version,
+			"minecraft_dependency_range": inputs.properties.minecraft_dependency_range,
+			"fabricloader_dependency_range": inputs.properties.fabricloader_dependency_range,
+			"java_dependency_range": inputs.properties.java_dependency_range,
+		)
+	}
+}
+
+def javaLanguageVersion = Integer.parseInt(project.java_language_version as String)
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = javaLanguageVersion
+}
+
+java {
+	def v = JavaVersion.toVersion(javaLanguageVersion)
+	sourceCompatibility = v
+	targetCompatibility = v
+}
+
+jar {
+	archiveFileName = "classicvillagers-v${project.mod_version}-${project.minecraft_version_label}.jar"
+	inputs.property "projectName", project.name
+
+	from("LICENSE") {
+		rename { "${it}_${project.name}"}
+	}
+}
