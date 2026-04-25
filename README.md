@@ -20,6 +20,9 @@ You can configure Classic Villagers using a couple of methods:
 
 ## Gallery
 
+## Before:
 ![ClassicVillagers image 1](src/main/resources/assets/classicvillagers/gallery1.png)
+## After:
 ![ClassicVillagers image 2](src/main/resources/assets/classicvillagers/gallery2.png)
+## Farms Fixed!
 ![ClassicVillagers image 3](src/main/resources/assets/classicvillagers/gallery3.png)
