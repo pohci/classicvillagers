@@ -17,9 +17,6 @@ public final class ModConfig {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final String FILE_NAME = "classicvillagers.json";
 	private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME);
-	private static final Path LEGACY_SERVER = FabricLoader.getInstance().getConfigDir().resolve("classicvillagers-server.json");
-	private static final Path LEGACY_CLIENT = FabricLoader.getInstance().getConfigDir().resolve("classicvillagers-client.json");
-	private static final Path[] LEGACY_PATHS = {LEGACY_SERVER, LEGACY_CLIENT};
 
 	private ModConfig() {
 	}
@@ -51,19 +48,21 @@ public final class ModConfig {
 		writeCurrent();
 	}
 
+	public static void setBabyVillagerOldModelEnabled(boolean enabled) {
+		FeatureConfig.setBabyVillagerOldModelEnabled(enabled);
+		writeCurrent();
+	}
+
 	public static void writeCurrent() {
 		ModConfigData data = new ModConfigData();
 		data.babyVillagerHitboxEnabled = FeatureConfig.isBabyVillagerHitboxEnabled();
+		data.babyVillagerOldModelEnabled = FeatureConfig.isBabyVillagerOldModelEnabled();
 		write(data);
 	}
 
 	private static ModConfigData readOrCreateDefault() {
 		if (!Files.exists(CONFIG_PATH)) {
-			Boolean fromLegacy = tryReadLegacy();
 			ModConfigData data = new ModConfigData();
-			if (fromLegacy != null) {
-				data.babyVillagerHitboxEnabled = fromLegacy;
-			}
 			write(data);
 			return data;
 		}
@@ -79,25 +78,6 @@ public final class ModConfig {
 		}
 	}
 
-	private static Boolean tryReadLegacy() {
-		for (Path legacy : LEGACY_PATHS) {
-			if (!Files.exists(legacy)) {
-				continue;
-			}
-			try (Reader reader = Files.newBufferedReader(legacy)) {
-				ModConfigData data = GSON.fromJson(reader, ModConfigData.class);
-				if (data == null) {
-					continue;
-				}
-				ClassicVillagers.LOGGER.info("migrated config from {} to {}", legacy.getFileName(), FILE_NAME);
-				return data.babyVillagerHitboxEnabled;
-			} catch (IOException | JsonParseException exception) {
-				ClassicVillagers.LOGGER.warn("failed to read legacy config {}", legacy, exception);
-			}
-		}
-		return null;
-	}
-
 	private static void write(ModConfigData data) {
 		try {
 			Files.createDirectories(CONFIG_PATH.getParent());
@@ -111,10 +91,14 @@ public final class ModConfig {
 
 	private static void apply(ModConfigData data) {
 		FeatureConfig.setBabyVillagerHitboxEnabled(data.babyVillagerHitboxEnabled);
+		FeatureConfig.setBabyVillagerOldModelEnabled(data.babyVillagerOldModelEnabled);
 	}
 
 	private static final class ModConfigData {
 		@SerializedName("babyVillagerHitboxEnabled")
 		private boolean babyVillagerHitboxEnabled = true;
+
+		@SerializedName("babyVillagerOldModelEnabled")
+		private boolean babyVillagerOldModelEnabled = false;
 	}
 }

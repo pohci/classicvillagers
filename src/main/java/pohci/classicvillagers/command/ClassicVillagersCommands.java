@@ -33,6 +33,25 @@ public final class ClassicVillagersCommands {
 						);
 						return 1;
 					})))
+			.then(Commands.literal("model")
+				.then(Commands.literal("new")
+					.executes(context -> {
+						ModConfig.setBabyVillagerOldModelEnabled(false);
+						context.getSource().sendSuccess(
+							() -> Component.literal("Baby villager model set to New"),
+							true
+						);
+						return 1;
+					}))
+				.then(Commands.literal("old")
+					.executes(context -> {
+						ModConfig.setBabyVillagerOldModelEnabled(true);
+						context.getSource().sendSuccess(
+							() -> Component.literal("Baby villager model set to Old"),
+							true
+						);
+						return 1;
+					})))
 			.then(Commands.literal("reload")
 				.executes(context -> {
 					if (!ModConfig.reloadFromFile()) {

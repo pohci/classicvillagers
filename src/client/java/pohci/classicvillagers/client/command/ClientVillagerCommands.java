@@ -29,6 +29,21 @@ public final class ClientVillagerCommands {
 						context.getSource().sendFeedback(CommandMessages.hitboxSet(value));
 						return 1;
 					})))
+			.then(ClientCommands.literal("model")
+				.then(ClientCommands.literal("new")
+					.executes(context -> {
+						ModConfig.setBabyVillagerOldModelEnabled(false);
+						ClientHitboxRefresh.refreshVisibleVillagers();
+						context.getSource().sendFeedback(Component.literal("Baby villager model set to New"));
+						return 1;
+					}))
+				.then(ClientCommands.literal("old")
+					.executes(context -> {
+						ModConfig.setBabyVillagerOldModelEnabled(true);
+						ClientHitboxRefresh.refreshVisibleVillagers();
+						context.getSource().sendFeedback(Component.literal("Baby villager model set to Old"));
+						return 1;
+					})))
 			.then(ClientCommands.literal("reload")
 				.executes(context -> {
 					if (!ModConfig.reloadFromFile()) {

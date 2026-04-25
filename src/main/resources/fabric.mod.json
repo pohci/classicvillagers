@@ -7,6 +7,7 @@
 	"authors": [
 		"pohci."
 	],
+	"icon": "assets/classicvillagers/icon.png",
 	"contact": {
 		"homepage": "https://github.com/pohci/classicvillagers",
 		"sources": "https://github.com/pohci/classicvillagers",
@@ -26,7 +27,8 @@
 		]
 	},
 	"mixins": [
-		"classicvillagers.mixins.json"
+		"classicvillagers.mixins.json",
+		"classicvillagers.client.mixins.json"
 	],
 	"custom": {
 		"modmenu": {

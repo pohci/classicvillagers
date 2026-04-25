@@ -13,7 +13,7 @@ import pohci.classicvillagers.config.ModConfig;
 
 public class ConfigScreen extends Screen {
 	private static final int PANEL_W = 280;
-	private static final int PANEL_H = 168;
+	private static final int PANEL_H = 204;
 	private static final int PANEL_BG_COLOR = 0xF0121412;
 	private static final int PANEL_RIM_COLOR = 0xFF5E7068;
 	private static final int TITLE_COLOR = 0xFFE8E8E8;
@@ -24,7 +24,9 @@ public class ConfigScreen extends Screen {
 	private int panelLeft;
 	private int panelTop;
 	private StringWidget statusWidget;
+	private StringWidget modelStatusWidget;
 	private PanelButton toggleButton;
+	private PanelButton modelButton;
 	private PanelButton doneButton;
 
 	public ConfigScreen(Screen parent) {
@@ -69,6 +71,27 @@ public class ConfigScreen extends Screen {
 		addRenderableWidget(toggleButton);
 		y += 32;
 
+		modelStatusWidget = new StringWidget(innerLeft, y, innerW, 12, currentModelStatus(), font);
+		addRenderableOnly(modelStatusWidget);
+		y += 18;
+
+		modelButton = new PanelButton(
+			innerLeft,
+			y,
+			innerW,
+			24,
+			modelActionLabel(),
+			false,
+			() -> {
+				ModConfig.setBabyVillagerOldModelEnabled(!FeatureConfig.isBabyVillagerOldModelEnabled());
+				ClientHitboxRefresh.refreshVisibleVillagers();
+				modelButton.setMessage(modelActionLabel());
+				modelStatusWidget.setMessage(currentModelStatus());
+			}
+		);
+		addRenderableWidget(modelButton);
+		y += 32;
+
 		StringWidget path = new StringWidget(innerLeft, y, innerW, 24, Component.translatable("classicvillagers.config.path"), font);
 		path.setMaxWidth(innerW);
 		addRenderableOnly(path);
@@ -102,6 +125,20 @@ public class ConfigScreen extends Screen {
 			return Component.translatable("classicvillagers.config.switchToFat");
 		}
 		return Component.translatable("classicvillagers.config.switchToSkinny");
+	}
+
+	private Component currentModelStatus() {
+		Component value = Component.translatable(
+			FeatureConfig.isBabyVillagerOldModelEnabled() ? "classicvillagers.model.old" : "classicvillagers.model.new"
+		);
+		return Component.translatable("classicvillagers.config.modelCurrent", value);
+	}
+
+	private Component modelActionLabel() {
+		if (FeatureConfig.isBabyVillagerOldModelEnabled()) {
+			return Component.translatable("classicvillagers.config.switchToNewModel");
+		}
+		return Component.translatable("classicvillagers.config.switchToOldModel");
 	}
 
 	@Override

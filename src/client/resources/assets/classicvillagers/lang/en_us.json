@@ -1,10 +1,15 @@
 {
 	"classicvillagers.config.title": "ClassicVillagers",
 	"classicvillagers.config.current": "Current: %s",
+	"classicvillagers.config.modelCurrent": "Model: %s",
 	"classicvillagers.config.switchToFat": "Switch to Fat",
 	"classicvillagers.config.switchToSkinny": "Switch to Skinny",
+	"classicvillagers.config.switchToNewModel": "Switch to New Model",
+	"classicvillagers.config.switchToOldModel": "Switch to Old Model",
 	"classicvillagers.config.path": "Config: .minecraft/config/classicvillagers.json",
 	"classicvillagers.config.done": "Done",
 	"classicvillagers.hitbox.skinny": "Skinny",
-	"classicvillagers.hitbox.fat": "Fat"
+	"classicvillagers.hitbox.fat": "Fat",
+	"classicvillagers.model.new": "New",
+	"classicvillagers.model.old": "Old"
 }
