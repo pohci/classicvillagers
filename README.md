@@ -14,9 +14,9 @@ You can configure Classic Villagers using a couple of methods:
 ### Project Links:
 [Github: pohci](https://github.com/pohci/classicvillagers)
 
-[Modrinth: pohci](https://modrinth.com/mod/classic-villagers)
+[Modrinth: pohci](https://modrinth.com/mod/classicvillagers)
 
-[Curseforge: pohci](https://curseforge.com/minecraft/mc-mods/classic-villagers)
+[Curseforge: pohci](https://curseforge.com/minecraft/mc-mods/classicvillagers)
 
 ## Gallery
 
